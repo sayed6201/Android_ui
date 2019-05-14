@@ -1,0 +1,4 @@
+
+/** Add Dependency in build.gradle(Module: app) **/
+
+implementation 'com.github.arimorty:floatingsearchview:2.1.1'
