@@ -40,3 +40,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+===============================================================
+Dialod
+===============================================================
+new AlertDialog.Builder(this)
+.setTitle("Title")
+.setMessage("Do you really want to whatever?")
+.setIcon(android.R.drawable.ic_dialog_alert)
+.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+    public void onClick(DialogInterface dialog, int whichButton) {
+        Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
+    }})
+ .setNegativeButton(android.R.string.no, null).show();
