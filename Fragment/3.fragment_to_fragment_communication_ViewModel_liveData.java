@@ -6,7 +6,7 @@
 ======================================================================================================
 */ 
  
- 
+ implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
 
 /*
 ======================================================================================================
@@ -80,6 +80,18 @@ public class FragmentA extends Fragment {
                 editText.setText(charSequence);
             }
         });
+
+        /*
+            //inside MainActivity 
+            
+            viewModel = ViewModelProviders.of(this).get(MyViewModel.class);
+            viewModel.getText().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String str) {
+                tv.setText(str);
+            }
+        });
+        */
     }
 }
 
