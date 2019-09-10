@@ -1,0 +1,167 @@
+=====================================================================================================
+MainActivity.java
+=====================================================================================================
+import android.graphics.Color
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.mikepenz.materialdrawer.Drawer
+import com.mikepenz.materialdrawer.DrawerBuilder
+import com.mikepenz.materialdrawer.holder.BadgeStyle
+import com.mikepenz.materialdrawer.model.DividerDrawerItem
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
+import kotlinx.android.synthetic.main.activity_main.*
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        toolbar.title = "Kotlin"
+        setSupportActionBar(toolbar);
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        var id = item?.itemId;
+
+        if(id == R.id.item1_id){
+            Toast.makeText(this,"Item 1",Toast.LENGTH_SHORT).show();
+        }
+        if(id == R.id.item2_id){
+            Toast.makeText(this,"Item 2",Toast.LENGTH_SHORT).show();
+        }
+        if(id == R.id.item3_id){
+            Toast.makeText(this,"Item 3",Toast.LENGTH_SHORT).show();
+        }
+        if(id == R.id.search_id){
+            Toast.makeText(this,"Searching",Toast.LENGTH_SHORT).show();
+        }
+        if(id == R.id.shopping_cart_id){
+            Toast.makeText(this,"adding to shopping cart",Toast.LENGTH_SHORT).show();
+        }
+//it's for backbutton
+        if(id == android.R.id.home){
+            Toast.makeText(this,"Exitiing",Toast.LENGTH_SHORT).show();
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+
+}
+
+====================================================================================================
+activity_main.xml ,  Define Toolbar
+====================================================================================================
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <androidx.appcompat.widget.Toolbar
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:minHeight="?attr/actionBarSize"
+            android:id="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+====================================================================================================
+main_menu.xml 
+====================================================================================================
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+            android:title="@string/item_1"
+            android:id="@+id/item1_id"/>
+
+    <item
+            android:title="@string/item_2"
+            android:id="@+id/item2_id"/>
+
+    <item
+            android:title="@string/item_3"
+            android:id="@+id/item3_id"/>
+
+    <item
+            android:title=""
+            android:id="@+id/search_id"
+            android:icon="@drawable/search_white_24dp"
+            app:showAsAction="always"/>
+
+    <item
+            android:title=""
+            android:id="@+id/shopping_cart_id"
+            android:icon="@drawable/add_shopping_cart_white_24dp"
+            app:showAsAction="always"/>
+</menu>
+
+
+
+==============================================================================================
+Styles.xml 
+==============================================================================================
+
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="popupTheme">@style/customPopUpMenu</item>
+    </style>
+
+    <style name="customPopUpMenu" parent="Theme.AppCompat.Light">
+        <item name="android:background">@color/menuBackgroundColor</item>
+        <item name="android:textColor">@color/menuTextColor</item>
+    </style>
+
+
+
+</resources>
+

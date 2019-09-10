@@ -1,0 +1,11 @@
+=====================================================================================================
+Toolbar with background image, curved image
+=====================================================================================================
+
+   	<androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:elevation="10dp"
+        android:background="@drawable/header_register"
+        android:theme="@style/ToolbarTheme" />
