@@ -1,0 +1,6 @@
+====================================================================
+How to make App Fast
+====================================================================
+1) use less number of Activity, use fragments
+2) use vector instead of png, or make png smaller
+3)

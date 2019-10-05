@@ -1,0 +1,18 @@
+=============================================================
+Data Passing between fragment
+=============================================================
+
+1. Intent
+2. Bundle
+3. Shared Preference
+4. Interface ( if you want to send data from activity to fragment or fragment to activity. If you want to use interface for sending data from one activity to another activity, it will not work because the instance will not be available to receive data. But it can be achieved through singleton which is not recommended)
+5. You can use Eventbus
+6. You can use observable concept of RxJava/RxAndroid 
+
+
+=============================================================
+Add, replace
+=============================================================
+
+
+1)add -> adds on top of each other freaky

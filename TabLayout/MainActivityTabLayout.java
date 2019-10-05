@@ -31,10 +31,29 @@ public class MainActivityTabLayout extends AppCompatActivity {
         pager.setOffscreenPageLimit(pagerAdaptor.getCount() > 1 ? pagerAdaptor.getCount() - 1 : 1);
         pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tab));
 
-        tab.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 pager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+        
+        //deprecated
+        /*
+        tab.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                
             }
 
             @Override
@@ -45,5 +64,6 @@ public class MainActivityTabLayout extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+        */
     }
 }
