@@ -19,6 +19,10 @@ public class CustomAdaptor extends RecyclerView.Adapter<CustomAdaptor.MyHolder> 
         void onClickItem(View v, int position);
     }
 
+    public void setClickListener(RecyclerTouchListener listener) {
+        this.listener = listener;
+    }
+
     Context context;
     LayoutInflater inflater;
     ArrayList<AndroidPOJO> model;
@@ -47,9 +51,7 @@ public class CustomAdaptor extends RecyclerView.Adapter<CustomAdaptor.MyHolder> 
         holder.release.setText(model.get(position).getRelease());
     }
 
-    public void setClickListener(RecyclerTouchListener listener) {
-        this.listener = listener;
-    }
+    
 
     /**Holder Class for Row Items**/
     public class MyHolder extends RecyclerView.ViewHolder {

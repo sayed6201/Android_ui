@@ -17,6 +17,8 @@ public class FirebaseConnector {
 
 }
 
+
+
 =====================================================================================================
 Retrieving Data as an object 
 =====================================================================================================
@@ -54,10 +56,54 @@ public void dataRetrieve(){
         FirebaseConnector.getInstanceFirebaseRef().addValueEventListener(postListener);
     }
 
+    ------------------------------------------------------
+    more retrieve
+    ------------------------------------------------------
+
+    public void dataRerieveLocationById(String locationId) {
+
+        final ProgressDialog pDialog = new ProgressDialog(getContext());
+        pDialog.setMessage("Retrieving...");
+        pDialog.show();
+
+        ValueEventListener postListener = new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                String uid = dataSnapshot.child("uid").getValue(String.class);
+
+                assert uid != null;
+                if(uid.equals(FirebaseAuthController.getCurrentUser().getUid())){
+                    Location location = dataSnapshot.child("information").getValue(Location.class);
+
+                    assert location != null;
+                    nameEt.setText(location.getLocationName());
+                    costEt.setText(location.getCost());
+                    locationDesEt.setText(location.getLocationDescription());
+                    submittedByEt.setText(location.getSubmittedBy());
+                    locationEt.setText(location.getLocation());
+                }
+
+                pDialog.hide();
+                pDialog.cancel();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                Log.w("EROOR", "loadPost:onCancelled", databaseError.toException());
+                pDialog.hide();
+                pDialog.cancel();
+            }
+        };
+        App.myPendingRef.child(locationId).addValueEventListener(postListener);
+    }
+
 
 
 =====================================================================================================
-Edititng Data as an object
+Add + Edititng Data as an object
 =====================================================================================================
 public void saveAction(View v){
       
@@ -88,3 +134,28 @@ Edititng Data as an object
 
         Toast.makeText(this, "Updated", Toast.LENGTH_SHORT).show();
     }
+
+
+
+=====================================================================================================
+Deleting Data as an object 
+=====================================================================================================
+App.myLocationRef.child(locationId)
+            .child("images")
+            .child(list.get(pos)
+                    .getId()).removeValue()
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+
+                    Toast.makeText(context,"Deleted",Toast.LENGTH_SHORT).show();
+                    mySpinnerDialog.cancelSpinner();
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    // Write failed
+                    mySpinnerDialog.cancelSpinner();
+                }
+            });

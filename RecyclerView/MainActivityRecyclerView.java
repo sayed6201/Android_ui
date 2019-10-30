@@ -30,6 +30,14 @@ public class MainActivityRecyclerView extends AppCompatActivity {
         /**Set The Adaptor to RecyclerView**/
         recyclerView.setAdapter(adaptor);
 
+
+        //StaggeredGridLayoutManager -------------------------------------------------------------------
+        // gallaryAdapter = new GallaryAdapter(GalleryActivity.this,list);
+        // StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        // gallaryRv.setLayoutManager(staggeredGridLayoutManager);
+        // gallaryRv.setAdapter(gallaryAdapter);
+        // readFromDb();
+
         /**On Click will invoke the interface RecyclerTouchListener**/
         adaptor.setClickListener(new CustomAdaptor.RecyclerTouchListener() {
             @Override
