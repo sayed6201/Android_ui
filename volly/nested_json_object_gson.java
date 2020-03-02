@@ -109,6 +109,11 @@ JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, 
 //Hope this will help you !!!
 
 
+
+
+====================================================================================
+Answer 2
+====================================================================================
 //Replace your JavaBean class with
 
 public class People {
@@ -179,8 +184,10 @@ this.phone = phone;
 }
 
 }
-And
 
+--------------------------------------------------------------------------------------
+And
+--------------------------------------------------------------------------------------
 public class Phone {
 
 @SerializedName("home")
@@ -228,23 +235,24 @@ this.mobile = mobile;
 
 }
 
+
 //and then you can make call in your JsonResponse like
+
 
 JSONObject phone=jsonObject.getJSONObject("phone");
 
 String home=phone.getHome();
 // will return you the home Number.
 
-
-
-you can also get the data directly from the json object like this
+//you can also get the data directly from the json object like this
 
 if(JsonObject!=null){
 String email=JsonObject.getString("email");
 }  
-OR
-To make it work write getters() and setters() in your model object(person object) you can auto generate it too . once you do that get the data like this
 
+//OR
+//To make it work write getters() and setters() in your model object(person object) you can auto generate it too . once you do that get the data like this
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, APITEST,null, new Response.Listener<JSONObject>() {
 
         @Override
