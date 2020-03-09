@@ -28,7 +28,6 @@ public class AlertReceiver extends BroadcastReceiver {
             context.stopService(serviceIntent);
         }
 
-
     }
 
 //    public void stopService(View v) {

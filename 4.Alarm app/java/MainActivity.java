@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         });
     }
 
+//trigger alert receiver using time+++++++++++++++++++++++++++++++++++++++++++++++++++
     private void startAlarm(Calendar c, long id) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);
@@ -141,9 +142,14 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
         }
+        //only once the task is executed++++++++++++++++++
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+
+        //task is executed INTERVAL_DAY ++++++++++++++++++
+        //alarmManager.setRepeating(AlarmManager.RTC, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY ,pendingIntent);
     }
 
+//cancel alert receiver++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void cancelAlarm(int id) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);
