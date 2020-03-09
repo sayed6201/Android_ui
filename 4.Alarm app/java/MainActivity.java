@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     @Override
     protected void onRestart() {
         super.onRestart();
-
     }
 
     @Override
@@ -116,14 +115,13 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         String timeText = "Alarm set for: ";
         timeText += DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime()) + " id: " + id;
 //            mTextView.setText(timeText);
-
     }
 
     private void updateRecyclerView() {
         list = (ArrayList<Alarm>) DbOperations.getAllAlarms(AppDatabase.getAppDatabase(this));
         adaptor = new AlarmAdapter(getApplicationContext(), list);
         recyclerView.setAdapter(adaptor);
-        adaptor.setClickListener(new AlarmAdapter.onClickDeleteListener() {
+        adaptor.setClickListener(new AlarmAdapter.onClickDeleteListener(){
             @Override
             public void onClickDelete(View v, int position) {
                 cancelAlarm(list.get(position).getId());
