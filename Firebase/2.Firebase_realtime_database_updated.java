@@ -18,6 +18,82 @@ public class FirebaseConnector {
 }
 
 
+=====================================================================================================
+Retrieving Data once only... 
+using: addListenerForSingleValueEvent(postListener) 
+not:  addValueEventListener(postListener)
+=====================================================================================================
+private void prepareAttendence(final String date) {
+
+
+        final ProgressDialog pDialog = new ProgressDialog(getContext());
+        pDialog.setMessage("Generating Qr code...");
+        pDialog.show();
+
+        ValueEventListener postListener = new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    if (childSnapshot != null) {
+                        String id = childSnapshot.getKey();
+                        Student std = childSnapshot.child(App.information).getValue(Student.class);
+
+                        if (id != null && std != null) {
+                            Attendence attendence =
+                                    new Attendence(
+                                            date,
+                                            mParam1,
+                                            id,
+                                            "no",
+                                            std.getName()
+                                    );
+
+                            App.classRef
+                                    .child(mParam1)
+                                    .child(App.registered_student)
+                                    .child(id)
+                                    .child(App.attendance)
+                                    .child(date)
+                                    .setValue(attendence)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+//                        Toast.makeText(getContext(), "Hospital added", Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        }
+
+                    }
+                }
+
+                pDialog.hide();
+                pDialog.cancel();
+
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                Log.w("EROOR", "loadPost:onCancelled", databaseError.toException());
+                pDialog.hide();
+                pDialog.cancel();
+            }
+
+        };
+        App.classRef.child(mParam1)
+                .child(App.registered_student)
+                .addListenerForSingleValueEvent(postListener);
+
+    }
 
 =====================================================================================================
 Retrieving Data as an object 
@@ -98,6 +174,62 @@ public void dataRetrieve(){
             }
         };
         App.myPendingRef.child(locationId).addValueEventListener(postListener);
+    }
+
+
+
+    ------------------------------------------------------
+    retrieving Complex data, child of child.........
+    ------------------------------------------------------
+     private void getAttandenceByDate(final String date) {
+
+
+        final ProgressDialog pDialog = new ProgressDialog(getContext());
+        pDialog.setMessage("Retrieving...");
+        pDialog.show();
+
+        ValueEventListener postListener = new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    String id = childSnapshot.getKey();
+                    if(id != null){
+
+                        for(DataSnapshot childOfChild : childSnapshot.child(App.attendance).getChildren()){
+                            String date = childOfChild.getKey();
+                            Attendence attendence = childOfChild.getValue(Attendence.class);
+
+                            if(attendence != null){
+                                Log.i("at",attendence.getDate()+"-"+date);
+                                Toast.makeText(getContext(), "-"+date, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    }
+
+                }
+
+                pDialog.hide();
+                pDialog.cancel();
+
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                Log.w("EROOR", "loadPost:onCancelled", databaseError.toException());
+                pDialog.hide();
+                pDialog.cancel();
+            }
+
+        };
+        App.classRef.child(mParam1)
+                .child(App.registered_student)
+                .addValueEventListener(postListener);
+
     }
 
 

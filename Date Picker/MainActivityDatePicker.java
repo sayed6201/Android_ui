@@ -64,4 +64,19 @@ public class MainActivityDatePicker extends AppCompatActivity {
         /**Call show() of DialogFragment class**/
         newFragment.show(getSupportFragmentManager(), "date picker");
     }
+
+//with interface click listener...............................................................
+    public void showDatePickerFragment() {
+        /**Show DialogFragment By Calling DatePickerFragment Class**/
+        DialogFragment newFragment = new DatePickerFragment();
+        /**Call show() of DialogFragment class**/
+        newFragment.show(getActivity().getSupportFragmentManager(), "date picker");
+
+        ((DatePickerFragment) newFragment).setDatepickerClickListener(new DatePickerFragment.DatepickerClickListener() {
+            @Override
+            public void onClickItem(int year, int month, int day) {
+                Toast.makeText(getContext(), year+"-"+month, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

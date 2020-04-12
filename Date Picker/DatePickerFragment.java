@@ -28,12 +28,39 @@ public class DatePickerFragment extends DialogFragment {
         return new DatePickerDialog(getActivity(), dateSetListener, year, month, day);
     }
 
+
     /**Date Set Listener**/
     private DatePickerDialog.OnDateSetListener dateSetListener =
             new DatePickerDialog.OnDateSetListener() {
                 public void onDateSet(DatePicker view, int year, int month, int day) {
                     /**Show Toast when Select any Date**/
                     Toast.makeText(getActivity(), "Selected date is " + view.getYear() + " / " + (view.getMonth() + 1) + " / " + view.getDayOfMonth(), Toast.LENGTH_SHORT).show();
+                }
+            };
+
+
+/*=====================================================================================================
+Singletone Class to create firebase Object
+=====================================================================================================*/
+
+    DatepickerClickListener listener;
+    
+    /**Interface for OnClickListener of RecyclerView**/
+    public interface DatepickerClickListener {
+        void onClickItem(int year, int month, int day);
+    }
+
+    public void setDatepickerClickListener(DatepickerClickListener listener) {
+        this.listener = listener;
+    }
+
+    /**Date Set Listener**/
+    private DatePickerDialog.OnDateSetListener dateSetListener =
+            new DatePickerDialog.OnDateSetListener() {
+                public void onDateSet(DatePicker view, int year, int month, int day) {
+                    /**Show Toast when Select any Date**/
+
+                    if (listener != null) listener.onClickItem(year, month, day);
                 }
             };
 }

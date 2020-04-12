@@ -72,7 +72,7 @@ public class MyDiffCallback extends DiffUtil.Callback{
 }
 
 
-//================Call the methodinside RecyclerView===================
+//================Call the method inside RecyclerView===================
 public void updateList(ArrayList<Person> newList) {
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new MyDiffCallback(this.persons, newList));
         diffResult.dispatchUpdatesTo(this);
