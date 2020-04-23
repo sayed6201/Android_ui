@@ -6,7 +6,7 @@ Interface: 1
 # T data is generic/dynamic type, string/int/object can be passed/
 ====================================================================================
 public interface ResponseCallback<T> {
-    //#T data is generic/dynamic type, string/int/object can be passed
+	//#T data is generic/dynamic type, string/int/object can be passed
     //some old compiler may not support <T> generic type
     void onSuccess(T data);
     void onError(Throwable th);
@@ -76,8 +76,8 @@ NetworkCall
 ====================================================================================
 public class NetworkCall implements MyApiService{
 
-    //userValidityCheck , POST method
-    //final ResponseCallback<String> userValidityCheckListener, is the interface that will notify the result to the Activity
+	//userValidityCheck , POST method
+	//final ResponseCallback<String> userValidityCheckListener, is the interface that will notify the result to the Activity
     @Override
     public void userValidityCheck(User userLoginCredential, final ResponseCallback<String> userValidityCheckListener) {
         Logger.addLogAdapter(new AndroidLogAdapter());
@@ -107,14 +107,14 @@ public class NetworkCall implements MyApiService{
             @Override
             public void onFailure(Call call, Throwable t) {
 
-                //onError taked Throeable as input,,
+            	//onError taked Throeable as input,,
                 userValidityCheckListener.onError(t);
             }
         });
     }
 
-    //getJokeFromServer , GET method
-    //final ResponseCallback<String> userValidityCheckListener, is the interface that will notify the result to the Activity
+	//getJokeFromServer , GET method
+	//final ResponseCallback<String> userValidityCheckListener, is the interface that will notify the result to the Activity
     @Override
     public void getJokeFromServer(String userId, final ResponseCallback<String> getJokeListener) {
         RetrofitApiInterface retrofitApiInterface = RetrofitApiClient.getClient().create(RetrofitApiInterface.class);
@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
             MyApiService myApiService = new NetworkCall();
             myApiService.userValidityCheck(user, new ResponseCallback<String>() {
 
-                //ResponseCallback interface methods notifies activity..
+            	//ResponseCallback interface methods notifies activity..
                 @Override
                 public void onSuccess(String msg) {
                     showToast(msg);
@@ -216,14 +216,14 @@ public class MainActivity extends AppCompatActivity {
             MyApiService myApiService = new NetworkCall();
             myApiService.getJokeFromServer(userId, new ResponseCallback<String>() {
 
-                //ResponseCallback interface methods notifies activity..
+            	//ResponseCallback interface methods notifies activity..
                 @Override
                 public void onSuccess(String joke) {
                     jokeTextView.setText(joke);
                     Logger.d("Activity: onSuccess of getJoke method is called");
                 }
 
-                //ResponseCallback interface methods notifies activity..
+				//ResponseCallback interface methods notifies activity..
                 @Override
                 public void onError(Throwable th) {
                     showToast(th.getMessage());

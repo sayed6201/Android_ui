@@ -3,4 +3,5 @@ How to make App Fast
 ====================================================================
 1) use less number of Activity, use fragments
 2) use vector instead of png, or make png smaller
-3)
+3) separate business logic from ui
+4) use interface it will be helpful for unit testing / dependecy inversion
