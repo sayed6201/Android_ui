@@ -92,6 +92,28 @@ If you need to adjust when the singleton object should be initilized,
 you can create one object for each class.
 ====================================================================================
 
+
+---------------------------------------------------------------------------------------------------------
+//singletone: 0
+---------------------------------------------------------------------------------------------------------
+object ServiceBuilder {
+    private val client = OkHttpClient
+        .Builder()
+        .build()
+
+    private val retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(client)
+        .build()
+        .create(TmdbEndpoints::class.java)
+
+    fun buildService(): TmdbEndpoints {
+        return retrofit
+    }
+}
+
 ---------------------------------------------------------------------------------------------------------
 //singletone: 1
 ---------------------------------------------------------------------------------------------------------

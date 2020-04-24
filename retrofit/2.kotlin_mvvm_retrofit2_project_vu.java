@@ -40,6 +40,25 @@ class RetrofitApiClient {
 
 }
 
+// you make singletone classes like below, it's beyyer approach
+object ServiceBuilder {
+    private val client = OkHttpClient
+        .Builder()
+        .build()
+
+    private val retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(client)
+        .build()
+        .create(TmdbEndpoints::class.java)
+
+    fun buildService(): TmdbEndpoints {
+        return retrofit
+    }
+}
+
 
    //=======================================EXAMPLE 2========================================
 //Kotlin APi CLinet with interceptor example:
